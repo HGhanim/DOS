@@ -3,7 +3,7 @@ import pandas as pd
 
 catalog_server = Flask(__name__)
 
-@catalog_server.route('/search/<string:subject>')
+@catalog_server.route('/search/<string:subject>', methods = ['GET'])
 def search(subject):
     catalog = pd.read_csv('catalog_file.csv')
     data = catalog.loc[catalog['subject'] == subject]
@@ -11,7 +11,7 @@ def search(subject):
     json = dataFrame.to_json(orient = "records")
     return {'data': json}
 
-@catalog_server.route('/info/<int:id>')
+@catalog_server.route('/info/<int:id>', methods = ['GET'])
 def info(id):
     catalog = pd.read_csv('catalog_file.csv')
     data = catalog.loc[catalog['id'] == id]
@@ -19,7 +19,7 @@ def info(id):
     json = dataFrame.to_json(orient = "records")
     return {'data': json}
 
-@catalog_server.route('/update/<int:id>')
+@catalog_server.route('/update/<int:id>', methods = ['PUT'])
 def update(id):
     catalog = pd.read_csv('catalog_file.csv')
     data = catalog.loc[catalog['id'] == id]

@@ -5,7 +5,7 @@ import json
 
 order_server = Flask(__name__)
 
-@order_server.route('/purchase/<int:id>')
+@order_server.route('/purchase/<int:id>', methods = ['PUT'])
 def purchase(id):
     info = requests.get('http://192.168.1.207:5000/info/'+str(id)).json()
     book = json.loads(info['data'])[0]
