@@ -17,8 +17,10 @@ def purchase(id):
            }
         orderDataFrame = pd.DataFrame(order)
         orderDataFrame.to_csv('orders_file.csv', mode='a', index=False, header=False)
-
-        return {"info":"hi"}
+        catalogResponse = requests.put('http://192.168.1.207:5000/update/' + str(id)).json()
+        return catalogResponse
+    else:
+        return {'status': book['title'] + ' is out of stock.'}
 
 def main():
     order_server.run(debug=True)
