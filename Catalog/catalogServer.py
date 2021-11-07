@@ -7,17 +7,24 @@ catalog_server = Flask(__name__)
 def search(subject):
     catalog = pd.read_csv('catalog_file.csv')
     data = catalog.loc[catalog['subject'] == subject]
-    dataFrame = pd.DataFrame(data, columns = ['id','title'])
-    json = dataFrame.to_json(orient = "records")
-    return {'data': json}
+    if(data.size == 0):
+        return {'status' : 'No books with this subject were found.'}
+    else:
+        dataFrame = pd.DataFrame(data, columns = ['id','title'])
+        json = dataFrame.to_json(orient = "records")
+        return {'data': json}
 
 @catalog_server.route('/info/<int:id>', methods = ['GET'])
 def info(id):
     catalog = pd.read_csv('catalog_file.csv')
     data = catalog.loc[catalog['id'] == id]
-    dataFrame = pd.DataFrame(data, columns = ['title','quantity', 'price'])
-    json = dataFrame.to_json(orient = "records")
-    return {'data': json}
+    if(data.size == 0):
+        return {'status' : 'Book not found.'}
+    else:
+        dataFrame = pd.DataFrame(data, columns = ['title','quantity', 'price'])
+        json = dataFrame.to_json(orient = "records")
+        return {'data': json}
+    
 
 @catalog_server.route('/update/<int:id>', methods = ['PUT'])
 def update(id):
