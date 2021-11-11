@@ -11,7 +11,7 @@ def purchase(id):
     try:
         book = json.loads(info['data'])[0]
     except:
-        return {"status": "Book not found."}
+        return {"status": "Book not found."}, 404
     if(book['quantity'] > 0):
         order = {
             'id' : id,
@@ -21,9 +21,9 @@ def purchase(id):
         orderDataFrame = pd.DataFrame(order)
         orderDataFrame.to_csv('orders_file.csv', mode='a', index=False, header=False)
         catalogResponse = requests.put('http://192.168.1.207:5000/update/' + str(id)).json()
-        return catalogResponse
+        return catalogResponse, 200
     else:
-        return {'status': book['title'] + ' is out of stock.'}
+        return {'status': book['title'] + ' is out of stock.'}, 404
 
 def main():
     order_server.run(debug=True)
