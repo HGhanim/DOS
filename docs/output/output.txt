@@ -1,0 +1,80 @@
+Request:
+http://192.168.1.176:5000/search/distributed systems
+
+Response: 
+{'data': '[{"id":1,"title":"How to get a good grade in DOS in 40 minutes a day"},{"id":2,"title":"RPCs for Noobs"}]'}
+Rsponse Status:
+200
+
+***********************
+
+Request:
+http://192.168.1.176:5000/search/disssss
+
+Response: 
+{'status': 'No books with this subject were found.'}
+Rsponse Status:
+404
+
+***********************
+
+Request:
+http://192.168.1.176:5000/info/4
+
+Response: 
+{'data': '[{"title":"Cooking for the Impatient Undergrad","quantity":1,"price":35}]'}
+Rsponse Status:
+200
+
+***********************
+
+Request:
+http://192.168.1.176:5000/purchase/4
+
+Response: 
+{'status': 'Cooking for the Impatient Undergrad was bought successfully.'}
+Rsponse Status:
+200
+
+***********************
+
+Request:
+http://192.168.1.176:5000/info/4
+
+Response: 
+{'data': '[{"title":"Cooking for the Impatient Undergrad","quantity":0,"price":35}]'}
+Rsponse Status:
+200
+
+***********************
+
+Request:
+http://192.168.1.176:5000/purchase/4
+
+Response: 
+{'status': 'Cooking for the Impatient Undergrad is out of stock.'}
+Rsponse Status:
+404
+
+***********************
+
+Request:
+http://192.168.1.176:5000/info/4
+
+Response: 
+{'data': '[{"title":"Cooking for the Impatient Undergrad","quantity":0,"price":35}]'}
+Rsponse Status:
+200
+
+***********************
+
+Request:
+http://192.168.1.176:5000/info/5
+
+Response: 
+{'status': 'Book not found.'}
+Rsponse Status:
+404
+
+***********************
+
